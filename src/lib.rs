@@ -12,16 +12,6 @@ use wasm_bindgen::__rt::std::io::{Write, Read};
 #[global_allocator]
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
-#[wasm_bindgen]
-extern {
-    fn alert(s: &str);
-}
-
-#[wasm_bindgen]
-pub fn greet() {
-    alert("Hello, brotli-rs2js!");
-}
-
 fn brotli_compress(buf: &Vec<u8>) -> Result<Vec<u8>, JsValue> {
     // (false, buf.clone())
     let compressed_buf = Vec::with_capacity(buf.len());
