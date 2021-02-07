@@ -8,7 +8,7 @@ edition = "2018"
 crate-type = ["cdylib", "rlib"]
 
 [features]
-default = ["console_error_panic_hook"]
+default = ["console_error_panic_hook", "wee_alloc"]
 
 [dependencies]
 wasm-bindgen = "0.2.63"
@@ -25,6 +25,9 @@ console_error_panic_hook = { version = "0.1.6", optional = true }
 #
 # Unfortunately, `wee_alloc` requires nightly Rust when targeting wasm for now.
 wee_alloc = { version = "0.4.5", optional = true }
+js-sys = { version = "0.3.47", features=[] }
+brotli = "3.3.0"
+bytes = "1"
 
 [dev-dependencies]
 wasm-bindgen-test = "0.3.13"
