@@ -1,5 +1,5 @@
 [package]
-name = "libbrotli-ffi"
+name = "brotli-jni"
 version = "0.1.0"
 authors = ["Michael van Niekerk <mvniekerk@chazaqdev.com>"]
 edition = "2018"
@@ -11,8 +11,10 @@ crate-type = ["lib", "cdylib"]
 default = []
 
 [dependencies]
-brotli = "3.3.0"
-bytes = "1"
+jni = "0.19"
+
+[dependencies.libbrotli-ffi]
+path = "../ffi"
 
 [profile.release]
 # Tell `rustc` to optimize for small code size.

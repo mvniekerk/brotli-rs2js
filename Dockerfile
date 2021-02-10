@@ -1,9 +1,14 @@
 FROM rust:1.48 as rustbuild
-RUN rustup target add wasm32-unknown-unknown && cargo install wasm-pack
+RUN cargo install cargo-ndk
+RUN rustup +nightly target add \
+    aarch64-linux-android \
+    armv7-linux-androideabi \
+    x86_64-linux-android \
+    i686-linux-android
 RUN mkdir /project
 WORKDIR /project
 COPY . /project
-RUN wasm-pack build --release
+
 
 FROM ubuntu:20.04
 RUN apt update && DEBIAN_FRONTEND="noninteractive" TZ="Europe/London" apt install -y build-essential git cmake python3 && apt clean

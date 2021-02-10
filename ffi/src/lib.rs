@@ -1,16 +1,8 @@
-mod utils;
 
-use wasm_bindgen::prelude::*;
-use js_sys::Uint8Array;
 use brotli::CompressorWriter;
 use bytes::BufMut;
-use wasm_bindgen::__rt::std::io::{Write, Read};
-
-// When the `wee_alloc` feature is enabled, use `wee_alloc` as the global
-// allocator.
-#[cfg(feature = "wee_alloc")]
-#[global_allocator]
-static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
+use std::io::{Read, Write};
+use bytes::Buf;
 
 #[no_mangle]
 pub extern "C" fn brotli_compress(buf: &Vec<u8>) -> Result<Vec<u8>, ()> {
