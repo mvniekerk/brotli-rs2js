@@ -1,4 +1,4 @@
-import l, { InitOutput } from '../lib/index.js';
+import { decompress, compress } from '../lib/brotli_rs2js';
 function unicodeStringToTypedArray(s: string): Uint8Array {
     const escstr = encodeURIComponent(s);
     const binstr = escstr.replace(/%([0-9A-F]{2})/g, function (match, p1) {
@@ -30,7 +30,9 @@ describe('Compress and decompress a bunch of bytes', () => {
     it('Compress a jwt array, and decompress it afterwards', async () => {
         const jwt = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
         const jwt_array = unicodeStringToTypedArray(jwt);
-        const { compress, decompress } = l.instance;
+        // const l = await init();
+        expect('1').toEqual('1');
+        // const { compress, decompress } = l.instance;
         const jwt_compressed = compress(jwt_array);
         const jwt_decompressed = decompress(jwt_compressed);
         const jwt_after_brotli = typedArrayToUnicodeString(jwt_decompressed);
