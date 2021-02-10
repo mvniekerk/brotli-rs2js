@@ -4,13 +4,12 @@
 #include <ostream>
 #include <new>
 
-template<typename T = void>
-struct Vec;
-
 extern "C" {
 
-Vec<uint8_t> brotli_compress(const Vec<uint8_t> *buf);
+const uint8_t *brotli_compress(unsigned char *cvec, unsigned int len, unsigned int *ret_array_len);
 
-Vec<uint8_t> brotli_decompress(const Vec<uint8_t> *arr);
+const uint8_t *brotli_decompress(unsigned char *cvec,
+                                 unsigned int len,
+                                 unsigned int *ret_array_len);
 
 } // extern "C"

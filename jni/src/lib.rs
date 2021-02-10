@@ -1,7 +1,7 @@
 use jni::objects::JClass;
 use jni::sys::jbyteArray;
 use jni::JNIEnv;
-use libbrotli_ffi::{brotli_compress, brotli_decompress};
+use libbrotli_ffi::{brotli_compress_rs, brotli_decompress_rs};
 
 #[no_mangle]
 pub unsafe extern "C" fn Java_za_co_agriio_brotli_Native_compress(
@@ -10,7 +10,7 @@ pub unsafe extern "C" fn Java_za_co_agriio_brotli_Native_compress(
     data: jbyteArray,
 ) -> jbyteArray {
     let data = env.convert_byte_array(data).unwrap();
-    let data = brotli_compress(&data).unwrap_or(vec![]);
+    let data = brotli_compress_rs(&data).unwrap_or(vec![]);
     let ret = env.byte_array_from_slice(&data).unwrap();
     ret
 }
@@ -22,7 +22,7 @@ pub unsafe extern "C" fn Java_za_co_agriio_brotli_Native_decompress(
     data: jbyteArray,
 ) -> jbyteArray {
     let data = env.convert_byte_array(data).unwrap();
-    let data = brotli_decompress(&data).unwrap_or(vec![]);
+    let data = brotli_decompress_rs(&data).unwrap_or(vec![]);
     let ret = env.byte_array_from_slice(&data).unwrap();
     ret
 }
