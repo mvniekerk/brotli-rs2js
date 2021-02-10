@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_DIR=$(dirname "$0")
-cd "${SCRIPT_DIR}"/..
+cd "${SCRIPT_DIR}"/../../
 
 if [[ -n "${DEVELOPER_SDK_DIR:-}" ]]; then
   # Assume we're in Xcode, which means we're probably cross-compiling.
@@ -12,6 +12,6 @@ if [[ -n "${DEVELOPER_SDK_DIR:-}" ]]; then
 fi
 
 cargo build -p libbrotli-ffi --release
-FFI_HEADER_PATH=swift/Sources/BrotliFfi/brotli_ffi.h
+FFI_HEADER_PATH=ios/swift/Sources/BrotliFfi/brotli_ffi.h
 
 cbindgen --profile release -o "${FFI_HEADER_PATH}" ffi
