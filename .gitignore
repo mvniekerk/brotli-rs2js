@@ -1,5 +1,6 @@
 /target
 **/*.rs.bk
+ffi/Cargo.lock
 Cargo.lock
 bin/
 pkg/
