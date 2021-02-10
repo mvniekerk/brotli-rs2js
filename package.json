@@ -1,7 +1,7 @@
 {
-  "name": "mobile-unit-ts",
+  "name": "brotli-rs2js",
   "version": "1.0.0",
-  "description": "Typescript repo for mobile headend unit and its data models",
+  "description": "WASM (converted to JS provided) for doing Brotli decompression and compression",
   "keywords": [],
   "author": "",
   "license": "ISC",
