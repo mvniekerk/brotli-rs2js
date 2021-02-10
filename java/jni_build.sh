@@ -1,3 +1,6 @@
+SCRIPT_DIR=$(dirname "$0")
+cd "${SCRIPT_DIR}"/../java
+
 copy_built_library() {
   for possible_library_name in "lib$2.dylib" "lib$2.so" "$2.dll"; do
     possible_library_path="$1/${possible_library_name}"

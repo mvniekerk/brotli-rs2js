@@ -5,6 +5,7 @@ RUN rustup +nightly target add \
     armv7-linux-androideabi \
     x86_64-linux-android \
     i686-linux-android
+RUN cargo install cbindgen
 RUN mkdir /project
 WORKDIR /project
 COPY . /project

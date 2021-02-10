@@ -1,0 +1,3 @@
+module BrotliFfi {
+	header "brotli_ffi.h"
+}
