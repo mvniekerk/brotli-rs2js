@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "ES2015",
+    "module": "CommonJS",
+    "declaration": true,
+    "strict": true,
+    "outDir": "brotli-lib"
+  },
+  "include": [
+    "lib/**/*"
+  ]
+}

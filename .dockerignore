@@ -5,3 +5,5 @@ pkg/
 Dockerfile
 build.sh
 lib/
+brotli-lib/
+node_modules/
