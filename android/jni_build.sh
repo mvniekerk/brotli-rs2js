@@ -17,9 +17,9 @@ for i in 'aarch64-linux-android' 'armv7-linux-androideabi' 'i686-linux-android' 
   echo $i
   cd ../jni
   cargo ndk --target $i --platform 23 -- build --release
-  cd ../java
-  mkdir -p android/src/main/jniLibs/$i
-  cp ../target/$i/release/libbrotli_jni.so android/src/main/jniLibs/$i/
+  cd ../android
+  mkdir -p src/main/jniLibs/$i
+  cp ../target/$i/release/libbrotli_jni.so src/main/jniLibs/$i/
 done
 
 
