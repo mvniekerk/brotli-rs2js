@@ -20,8 +20,12 @@ public class BrotliModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void sampleMethod(String stringArgument, int numberArgument, Callback callback) {
-        // TODO: Implement some actually useful functionality
-        callback.invoke("Received numberArgument: " + numberArgument + " stringArgument: " + stringArgument);
+    public void compress(String base64Buf, Callback callback) {
+        callback.invoke("");
+    }
+
+    @ReactMethod
+    public void decompress(String base64Buf, Callback callback) {
+        callback.invoke("");
     }
 }
