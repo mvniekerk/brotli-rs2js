@@ -12,6 +12,7 @@
   },
   "main": "lib/brotli_rs2js.js",
   "typings": "brotli_rs2js.d.ts",
+  "type": "module",
   "scripts": {
     "build": "build.sh",
     "test": "jest",
