@@ -12,20 +12,16 @@ Pod::Spec.new do |s|
   s.platform = :ios, '10'
 
   s.dependency 'CocoaLumberjack/Swift'
+  s.dependency "React"
 
-  s.source_files = [
-    'swift/Sources/**/*.swift',
-    'swift/Sources/**/*.m',
-    # FIXME: We'd like to hide this from downstream clients at some point.
-    # (Making this header accessible to both CocoaPods and SwiftPM is hard.)
-    'swift/Sources/BrotliFfi/brotli_ffi.h'
-  ]
+  s.source_files = 'ios/**/*.{h,c,m,swift}',
+
   s.preserve_paths = [
     'bin/*',
     'Cargo.toml',
     'Cargo.lock',
     'ffi/*',
-    'swift/*.sh',
+    'ios/swift/*.sh',
   ]
 
   s.pod_target_xcconfig = {
