@@ -3,7 +3,7 @@ use brotli::CompressorWriter;
 use bytes::BufMut;
 use std::io::{Read, Write};
 use bytes::Buf;
-use c_vec::CVec;
+use std::ffi::{CStr, CString};
 
 pub fn brotli_compress_rs(buf: &Vec<u8>) -> Vec<u8> {
     // (false, buf.clone())
@@ -27,15 +27,18 @@ pub fn brotli_compress_rs(buf: &Vec<u8>) -> Vec<u8> {
 }
 
 #[no_mangle]
-pub extern "C" fn brotli_compress(cvec: *mut libc::c_uchar, len: libc::c_uint, ret_array_len: *mut libc::c_uint) -> *const u8 {
-    let buf = unsafe { CVec::new(cvec, len as usize) };
-    let buf = buf.as_ref().to_vec();
+pub extern "C" fn brotli_compress_base64(s: *const libc::c_char) -> *const libc::c_char {
+    let str = unsafe {
+        assert!(!s.is_null());
+        CStr::from_ptr(s)
+    };
+
+    let str = str.to_str().unwrap();
+    let buf = base64::decode(str).unwrap();
     let ret = brotli_compress_rs(&buf);
-    let ret_len = ret.len();
-    let ret = Box::new(&ret);
-    let ret = Box::into_raw(ret) as *const _;
-    unsafe { *ret_array_len = ret_len as libc::c_uint; };
-    ret
+    let ret = base64::encode(&ret);
+    let s = CString::new(ret).unwrap();
+    s.into_raw()
 }
 
 pub fn brotli_copy<R: Read, W: Write>(source: R, mut dest: W) -> std::io::Result<u64> {
@@ -44,15 +47,28 @@ pub fn brotli_copy<R: Read, W: Write>(source: R, mut dest: W) -> std::io::Result
 }
 
 #[no_mangle]
-pub extern "C" fn brotli_decompress(cvec: *mut libc::c_uchar, len: libc::c_uint, ret_array_len: *mut libc::c_uint) -> *const u8 {
-    let buf = unsafe { CVec::new(cvec, len as usize) };
-    let buf = buf.as_ref().to_vec();
+pub extern "C" fn brotli_decompress_base64(s: *const libc::c_char) -> *const libc::c_char {
+    let str = unsafe {
+        assert!(!s.is_null());
+        CStr::from_ptr(s)
+    };
+
+    let str = str.to_str().unwrap();
+    let buf = base64::decode(str).unwrap();
     let ret = brotli_decompress_rs(&buf);
-    let ret_len = ret.len();
-    let ret = Box::new(&ret);
-    let ret = Box::into_raw(ret) as *const _;
-    unsafe { *ret_array_len = ret_len as libc::c_uint; };
-    ret
+    let ret = base64::encode(&ret);
+    let s = CString::new(ret).unwrap();
+    s.into_raw()
+}
+
+#[no_mangle]
+pub extern "C" fn brotli_free_string(s: *mut libc::c_char) {
+    unsafe {
+        if s.is_null() {
+            return;
+        }
+        CString::from_raw(s);
+    }
 }
 
 pub fn brotli_decompress_rs(arr: &Vec<u8>) -> Vec<u8> {

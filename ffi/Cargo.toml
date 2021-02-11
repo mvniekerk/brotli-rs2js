@@ -16,6 +16,7 @@ bytes = "1"
 c_vec = "1"
 libc = "0.2"
 ffi-support = "0.4"
+base64 = "0.13"
 
 [profile.release]
 # Tell `rustc` to optimize for small code size.

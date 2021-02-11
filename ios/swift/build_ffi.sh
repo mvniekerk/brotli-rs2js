@@ -14,4 +14,4 @@ fi
 cargo build -p libbrotli-ffi --release
 FFI_HEADER_PATH=ios/swift/Sources/BrotliFfi/brotli_ffi.h
 
-cbindgen --profile release -o "${FFI_HEADER_PATH}" ffi
+cbindgen --profile release --lang c -o "${FFI_HEADER_PATH}" ffi
