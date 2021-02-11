@@ -1,6 +1,6 @@
 import PackageDescription
 
-let rustBuildDir = "../target/debug/"
+let rustBuildDir = "../target/release/"
 let autoImportBrotliFfi = [
     "-Xfrontend", "-import-module", "-Xfrontend", "BrotliFfi"
 ]

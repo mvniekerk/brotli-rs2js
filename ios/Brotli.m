@@ -1,3 +1,4 @@
+#import <React/RCTBridgeModule.h>
 #import "Brotli.h"
 
 @implementation Brotli

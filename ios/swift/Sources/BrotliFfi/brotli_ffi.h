@@ -6,10 +6,10 @@
 
 extern "C" {
 
-const uint8_t *brotli_compress(unsigned char *cvec, unsigned int len, unsigned int *ret_array_len);
+const char *brotli_compress_base64(const char *s);
 
-const uint8_t *brotli_decompress(unsigned char *cvec,
-                                 unsigned int len,
-                                 unsigned int *ret_array_len);
+const char *brotli_decompress_base64(const char *s);
+
+void brotli_free_string(char *s);
 
 } // extern "C"
